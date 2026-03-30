@@ -1,13 +1,64 @@
 const TASK_COUNT = 50;
 const MIN = 100;
 const MAX = 999;
+const TIMER_SECONDS = 5 * 60;
 
 const tasksContainer = document.getElementById("tasks");
 const resultContainer = document.getElementById("result");
 const checkBtn = document.getElementById("check-btn");
 const generateBtn = document.getElementById("generate-btn");
+const startTimerBtn = document.getElementById("start-timer-btn");
+const timerDisplay = document.getElementById("timer-display");
 
 let tasks = [];
+let timerId = null;
+let timeLeft = TIMER_SECONDS;
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${String(minutes).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+}
+
+function renderTimer() {
+  if (!timerDisplay) {
+    return;
+  }
+
+  timerDisplay.textContent = formatTime(timeLeft);
+}
+
+function resetTimer() {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+  }
+
+  timeLeft = TIMER_SECONDS;
+  renderTimer();
+
+  if (timerDisplay) {
+    timerDisplay.classList.remove("finished");
+  }
+}
+
+function startTimer() {
+  resetTimer();
+
+  timerId = setInterval(() => {
+    timeLeft -= 1;
+    renderTimer();
+
+    if (timeLeft <= 0) {
+      clearInterval(timerId);
+      timerId = null;
+
+      if (timerDisplay) {
+        timerDisplay.classList.add("finished");
+      }
+    }
+  }, 1000);
+}
 
 function randomEvenThreeDigit() {
   const random = Math.floor(Math.random() * (MAX - MIN + 1)) + MIN;
@@ -123,9 +174,11 @@ function setup() {
   tasks = createTasks();
   renderTasks();
   resetResult();
+  resetTimer();
 }
 
 checkBtn.addEventListener("click", checkAnswers);
 generateBtn.addEventListener("click", setup);
+startTimerBtn?.addEventListener("click", startTimer);
 
 setup();
