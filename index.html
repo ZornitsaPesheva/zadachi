@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Деление на 2 - 50 задачи</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="aurora"></div>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Математически тренажор</p>
+        <h1>50 задачи за деление на 2</h1>
+        <p class="subtitle">
+          Въведи резултата от делението за всяко трицифрено число.
+        </p>
+      </header>
+
+      <section class="panel controls">
+        <button id="generate-btn" class="btn btn-secondary">Нови задачи</button>
+        <button id="check-btn" class="btn btn-primary">Провери</button>
+      </section>
+
+      <section class="panel tasks-wrap">
+        <div id="tasks" class="tasks-grid"></div>
+      </section>
+
+      <section id="result" class="panel result" aria-live="polite"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
