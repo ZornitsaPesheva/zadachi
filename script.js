@@ -42,6 +42,11 @@ function resetTimer() {
   }
 }
 
+function showTimeUpModalAndResults() {
+  window.alert("Времето изтече! Натисни ОК, за да видиш резултатите.");
+  checkAnswers();
+}
+
 function startTimer() {
   resetTimer();
 
@@ -56,6 +61,8 @@ function startTimer() {
       if (timerDisplay) {
         timerDisplay.classList.add("finished");
       }
+
+      showTimeUpModalAndResults();
     }
   }, 1000);
 }
